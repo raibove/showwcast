@@ -1,0 +1,23 @@
+.header{
+    display: flex;
+    margin: 10px 20px;
+    cursor: pointer;
+}
+
+.header-title{
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 400;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.logo{
+    width: 60px;
+}
+
+@media only screen and (max-width: 580px) {
+    .header-title{
+        font-size: 25px;
+        line-height: 30px;
+    }
+}
