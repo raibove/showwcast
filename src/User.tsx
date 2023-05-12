@@ -1,6 +1,8 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import "./User.css"
 import axios from "axios";
+import { Player } from "@remotion/player";
+import {Portfolio} from '../remotion/compositions/templates/portfolio/Portfolio'
 
 interface UserProps{
     displayName: string;
@@ -10,6 +12,7 @@ interface UserProps{
 const User = ()=>{
     const [username, setUsername] = useState("")
     const [userInfo, setUserInfo] = useState<UserProps | null>(null)
+
     const updateUsername = (e: FormEvent<HTMLInputElement | HTMLSelectElement>)=>{
         setUsername(e.currentTarget.value)
     }
@@ -27,11 +30,31 @@ const User = ()=>{
     return (
         <div className="container">
             <div className="player">
-                {userInfo!==null &&
+                {/* {userInfo!==null &&
                     <div>
                         <h3>{userInfo.displayName}</h3>
                         <pre className="user-about">{userInfo.about}</pre>
                     </div>
+                } */}
+                {userInfo!==null &&
+                <div
+                style={{
+                    position: "relative"
+                  }}
+                >
+                    <Player
+                        component={Portfolio}
+                        inputProps={{ title: userInfo.displayName }}
+                        durationInFrames={270}
+                        compositionWidth={1800}
+                        compositionHeight={1080}
+                        fps={30}
+                        style={{
+                            width: '100%',
+                        }}
+                        controls
+                    />
+                </div>
                 }
             </div>
             <div className="form">

@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@remotion/cli": "^3.3.91",
+    "@remotion/player": "^3.3.91",
     "axios": "^1.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "remotion": "^3.3.91"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
