@@ -4,10 +4,12 @@ import User from './User'
 function App() {
 
   return (
-    <>
+    <div className='App'>
       <Header />
-      <User />
-    </>
+      <div className='main-content'>
+        <User />
+      </div>
+    </div>
   )
 }
 

@@ -7,6 +7,7 @@ import {Portfolio} from '../remotion/compositions/templates/portfolio/Portfolio'
 interface UserProps{
     displayName: string;
     about: string;
+    profilePictureUrl: string;
 }
 
 const User = ()=>{
@@ -44,7 +45,7 @@ const User = ()=>{
                 >
                     <Player
                         component={Portfolio}
-                        inputProps={{ title: userInfo.displayName }}
+                        inputProps={{ title: userInfo.displayName, src: userInfo.profilePictureUrl }}
                         durationInFrames={270}
                         compositionWidth={1800}
                         compositionHeight={1080}

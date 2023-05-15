@@ -21,7 +21,6 @@
 }
 
 .form{
-    width: 50%;
     text-align: center;
 }
 
@@ -57,4 +56,16 @@
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+}
+
+
+@media only screen and (max-width: 580px) {
+    .player{
+        width: 95%;
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+    }
 }
