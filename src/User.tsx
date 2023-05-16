@@ -45,7 +45,7 @@ const User = ()=>{
                 >
                     <Player
                         component={Portfolio}
-                        inputProps={{ title: userInfo.displayName, src: userInfo.profilePictureUrl }}
+                        inputProps={{ title: userInfo.displayName, src: userInfo.profilePictureUrl, about: userInfo.about }}
                         durationInFrames={270}
                         compositionWidth={1800}
                         compositionHeight={1080}
