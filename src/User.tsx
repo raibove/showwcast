@@ -31,12 +31,6 @@ const User = ()=>{
     return (
         <div className="container">
             <div className="player">
-                {/* {userInfo!==null &&
-                    <div>
-                        <h3>{userInfo.displayName}</h3>
-                        <pre className="user-about">{userInfo.about}</pre>
-                    </div>
-                } */}
                 {userInfo!==null &&
                 <div
                 style={{
@@ -46,7 +40,7 @@ const User = ()=>{
                     <Player
                         component={Portfolio}
                         inputProps={{ title: userInfo.displayName, src: userInfo.profilePictureUrl, about: userInfo.about }}
-                        durationInFrames={270}
+                        durationInFrames={480}
                         compositionWidth={1800}
                         compositionHeight={1080}
                         fps={30}
