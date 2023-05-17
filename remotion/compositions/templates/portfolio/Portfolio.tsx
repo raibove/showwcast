@@ -7,6 +7,8 @@ import {
 } from "remotion";
 import React from "react";
 import MapPin from "../../../../src/assets/map-pin.svg"
+import {WebTechnologies} from "./WebTechnologies"
+
 // CFFFB3
 // FCEC52
 // CA907E
@@ -38,9 +40,19 @@ export const Portfolio: React.FC<{
     extrapolateRight: "clamp",
   });
 
+  const slideProgress = interpolate(
+		frame,
+		[180, 220],
+		[-100, 0],
+		{
+			extrapolateRight: 'clamp',
+		}
+	);
+
+
   return (
     <>
-      <Sequence from={0} durationInFrames={380} name="Event image">
+      <Sequence from={0} durationInFrames={550} name="Event image">
         <AbsoluteFill
           style={{
             overflow: "hidden",
@@ -119,13 +131,13 @@ export const Portfolio: React.FC<{
            }}
             >Activity: {activity.emoji} {activity.message}</p>
         </AbsoluteFill>
-        {/* <AbsoluteFill
+        <AbsoluteFill
           style={{
-            opacity: overlayOpacity,
-            backgroundColor: "rgba(255,119,61, .86)",
-            width: "100%",
+					transform: `translateY(${slideProgress}%)`,
+          backgroundColor: "#3D348B",
           }}
         >
+          
           <p
             style={{
               WebkitBoxOrient: "vertical",
@@ -143,8 +155,12 @@ export const Portfolio: React.FC<{
             <br />
             {about}
           </p>
-        </AbsoluteFill> */}
+        </AbsoluteFill>
+        <Sequence from={350} >
+          <WebTechnologies/>
+        </Sequence>
       </Sequence>
     </>
   );
 };
+

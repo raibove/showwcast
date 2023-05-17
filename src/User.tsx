@@ -59,7 +59,7 @@ const User = () => {
                 activity: userInfo.activity,
                 headline: userInfo.headline
               }}
-              durationInFrames={480}
+              durationInFrames={680}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}
