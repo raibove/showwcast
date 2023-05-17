@@ -102,7 +102,7 @@ export const WebTechnologies: React.FC = () => {
       <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
         {chunks.map((ch) => {
           return (
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: 1}}>
               {ch.map((t, i) => {
                 const pos = spring({
                   fps: config.fps,
@@ -123,12 +123,11 @@ export const WebTechnologies: React.FC = () => {
                         [200, 0]
                       )}px)`,
                       opacity: pos,
-                      fontWeight: "bold",
-                      fontSize: 120,
-                      lineHeight: "1em",
-                      fontFamily:
-                        "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
-                    }}
+                      fontSize: '6.5em',
+                      lineHeight: "1.5em",
+                      fontFamily: "Cursive",
+                      textAlign:'center'
+                      }}
                   >
                     {t.name}
                   </div>
