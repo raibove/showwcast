@@ -2,15 +2,19 @@ import {
   AbsoluteFill,
   Sequence,
   Img,
-  spring,
   interpolate,
   useCurrentFrame,
-  useVideoConfig,
 } from "remotion";
 import React from "react";
+import MapPin from "../../../../src/assets/map-pin.svg"
 // CFFFB3
 // FCEC52
 // CA907E
+
+interface ActivityProps {
+  emoji: string;
+  message: string;
+}
 
 export const Portfolio: React.FC<{
   backgroundImg?: string;
@@ -18,9 +22,11 @@ export const Portfolio: React.FC<{
   about: string;
   src?: string;
   fontFamily?: string;
-}> = ({ title, src, about }) => {
+  headline?: string;
+  location?: string;
+  activity: ActivityProps;
+}> = ({ title, src, about, headline, location, activity }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
 
   const scale = interpolate(frame, [10, 30], [0, 1], {
     extrapolateLeft: "clamp",
@@ -28,7 +34,7 @@ export const Portfolio: React.FC<{
   });
 
   const titleOpacity = interpolate(frame, [30, 60], [0, 1]);
-  const overlayOpacity = interpolate(frame, [80, 130], [0, 1], {
+  const overlayOpacity = interpolate(frame, [80, 110], [0, 1], {
     extrapolateRight: "clamp",
   });
 
@@ -80,7 +86,43 @@ export const Portfolio: React.FC<{
         <AbsoluteFill
           style={{
             opacity: overlayOpacity,
-            backgroundColor: "#FF773D",
+            backgroundColor: "rgba(255,119,61, .9)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+            textAlign: "center",
+            padding: '10% 0'
+          }}
+        >
+            <p style={{
+               fontSize: "4em",
+               textAlign: "center",
+               fontFamily: 'cursive',
+            }}>
+              I'm a {headline}</p>
+            <div style={{display:'flex'}}>
+            <Img style={{ width:'15%'}} src={MapPin}/>
+            <p
+            style={{
+              fontSize: "4.2em",
+              textAlign: "center",
+              fontFamily: 'cursive'
+           }}
+            > Located in {location}</p>
+            </div>
+            <p
+            style={{
+              fontSize: "4.2em",
+              textAlign: "center",
+              fontFamily: 'cursive'
+           }}
+            >Activity: {activity.emoji} {activity.message}</p>
+        </AbsoluteFill>
+        {/* <AbsoluteFill
+          style={{
+            opacity: overlayOpacity,
+            backgroundColor: "rgba(255,119,61, .86)",
             width: "100%",
           }}
         >
@@ -101,7 +143,7 @@ export const Portfolio: React.FC<{
             <br />
             {about}
           </p>
-        </AbsoluteFill>
+        </AbsoluteFill> */}
       </Sequence>
     </>
   );
