@@ -18,15 +18,37 @@ interface UserProps {
   headline?: string;
 }
 
+interface StackDetailProps {
+  id: number;
+  name: string;
+  iconUrl: string;
+}
+
+interface StackProps {
+  id: number;
+  stack: StackDetailProps;
+}
+
 const User = () => {
   const [username, setUsername] = useState("");
   const [userInfo, setUserInfo] = useState<UserProps | null>(null);
+  const [userStack, setUserStack] = useState<StackProps[]>([]);
 
   const updateUsername = (
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setUsername(e.currentTarget.value);
   };
+
+  const getStacks = async () =>{
+    try{
+      const res = await axios.get(`https://cache.showwcase.com/user/${username}/stacks`)
+      console.log(res)
+      setUserStack(res.data)
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   const getUser = async () => {
     try {
@@ -35,6 +57,7 @@ const User = () => {
       );
       console.log(res);
       setUserInfo(res.data);
+      getStacks()
     } catch (err) {
       setUserInfo(null);
     }
@@ -57,7 +80,8 @@ const User = () => {
                 about: userInfo.about,
                 location: userInfo.location,
                 activity: userInfo.activity,
-                headline: userInfo.headline
+                headline: userInfo.headline,
+                techStack: userStack
               }}
               durationInFrames={680}
               compositionWidth={1800}
