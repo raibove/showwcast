@@ -39,7 +39,8 @@ export const WebTechnologies: React.FC<{ technology: Technology[] }> = ({
     >
       <p
         style={{
-          fontSize: "4em",
+          fontSize: "4.5em",
+          fontFamily: 'Roboto',
           color: "black",
           textAlign: "center",
           padding: 0,
