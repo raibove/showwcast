@@ -5,8 +5,8 @@ import { Player } from "@remotion/player";
 import { Portfolio } from "../remotion/compositions/templates/portfolio/Portfolio";
 
 interface ActivityProps {
-    emoji: string;
-    message: string;
+  emoji: string;
+  message: string;
 }
 
 interface UserProps {
@@ -40,15 +40,17 @@ const User = () => {
     setUsername(e.currentTarget.value);
   };
 
-  const getStacks = async () =>{
-    try{
-      const res = await axios.get(`https://cache.showwcase.com/user/${username}/stacks`)
-      console.log(res)
-      setUserStack(res.data)
-    }catch(err){
-      console.log(err)
+  const getStacks = async () => {
+    try {
+      const res = await axios.get(
+        `https://cache.showwcase.com/user/${username}/stacks`
+      );
+      console.log(res);
+      setUserStack(res.data);
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   const getUser = async () => {
     try {
@@ -57,7 +59,7 @@ const User = () => {
       );
       console.log(res);
       setUserInfo(res.data);
-      getStacks()
+      getStacks();
     } catch (err) {
       setUserInfo(null);
     }
@@ -81,7 +83,7 @@ const User = () => {
                 location: userInfo.location,
                 activity: userInfo.activity,
                 headline: userInfo.headline,
-                techStack: userStack
+                techStack: userStack,
               }}
               durationInFrames={680}
               compositionWidth={1800}

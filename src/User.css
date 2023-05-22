@@ -1,56 +1,57 @@
-.input{
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 18px;
+.input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 18px;
 }
 
-.input:focus, .input:focus-visible{
-    outline: none;
+.input:focus,
+.input:focus-visible {
+  outline: none;
 }
 
-.container{
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 40px;
-    align-items: center;
-    min-height: 55vh;
+.container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 40px;
+  align-items: center;
+  min-height: 55vh;
 }
 
-.player{
-    width: 50%;
+.player {
+  width: 50%;
 }
 
-.form{
-    text-align: center;
+.form {
+  text-align: center;
 }
 
-.title{
-    color: #f5deb3;
+.title {
+  color: #f5deb3;
 }
 
 .submit {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: wheat;
-    cursor: pointer;
-    transition: border-color 0.25s;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: wheat;
+  cursor: pointer;
+  transition: border-color 0.25s;
 }
 
 .submit:hover {
-    border-color: #f5deb3;
+  border-color: #f5deb3;
 }
 
 .submit:focus,
 .submit:focus-visible {
-    outline: none;
+  outline: none;
 }
 
-.user-about{
-    overflow-x: auto;
+.user-about {
+  overflow-x: auto;
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
   white-space: -pre-wrap;
@@ -58,14 +59,13 @@
   word-wrap: break-word;
 }
 
-
 @media only screen and (max-width: 580px) {
-    .player{
-        width: 95%;
-    }
-    .container{
-        display: flex;
-        flex-direction: column;
-        margin: 10px;
-    }
+  .player {
+    width: 95%;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+  }
 }

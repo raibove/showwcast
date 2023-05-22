@@ -13,6 +13,7 @@ interface ActivityProps {
 interface CompanyProps {
   name: string;
   logo: string;
+  oneLiner: string;
 }
 
 interface StackDetailProps {
@@ -63,6 +64,7 @@ const Company = () => {
               inputProps={{
                 name: companyInfo.name,
                 logo: companyInfo.logo,
+                oneliner: companyInfo.oneLiner
               }}
               durationInFrames={680}
               compositionWidth={1800}
