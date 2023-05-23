@@ -35,6 +35,10 @@ function App() {
       element: <User />
     },
     {
+      path: '/company',
+      element: <Company />
+    },
+    {
       path: '*',
       element: <ErrorPage />
     }
