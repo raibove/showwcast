@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   AbsoluteFill,
   useCurrentFrame,
@@ -13,9 +13,9 @@ export const CompanyName: React.FC<{
   name: string;
   logo: string;
   oneliner: string;
-}> = ({ name, logo, oneliner = "Its a beautiful day" }) => {
+}> = ({ name, logo, oneliner = "A company you would like to be in" }) => {
   const frame = useCurrentFrame();
-  const { durationInFrames, fps, width } = useVideoConfig();
+  const { fps, width } = useVideoConfig();
 
   const logoTranslationProgress = spring({
     frame: frame - 50,
@@ -25,7 +25,6 @@ export const CompanyName: React.FC<{
     },
   });
 
-  // Move the logo up by 150 pixels once the transition starts
   const logoTranslation = interpolate(
     logoTranslationProgress,
     [0, 1],
@@ -70,82 +69,88 @@ export const CompanyName: React.FC<{
 
   const scaleDown = interpolate(scaleDownProgress, [0, 1], [1, 0.7]);
 
-  const delay = (durationInFrames - 10) / oneliner.length;
-
-  // Calculate the index of the current character to display
-  const index = Math.min(Math.floor(frame / delay), oneliner.length);
-  const textShown = oneliner.slice(0, index);
+  const textAnimate = spring({
+    fps,
+    frame: frame - 150,
+    config: { damping: 250 },
+  });
 
   return (
     <AbsoluteFill>
-    <AbsoluteFill
-      style={{
-        transform: `translateY(${translateUp}px) scale(${scaleDown})`,
-      }}
-    >
       <AbsoluteFill
         style={{
-          transform: `scale(${logoInitialScale})`,
+          transform: `translateY(${translateUp}px) scale(${scaleDown})`,
         }}
       >
         <AbsoluteFill
           style={{
-            transform: `translateX(${logoTranslation}px) scale(${interpolate(
-              logoScale,
-              [0, 1],
-              [1, 0.5]
-            )}) `,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            transform: `scale(${logoInitialScale})`,
           }}
         >
-          <Img
-            src={logo}
-            style={{ width: "620px", height: "650px", borderRadius: "50%" }}
-          />
-        </AbsoluteFill>
-        <Sequence from={70}>
-          <AbsoluteFill
+          <div
             style={{
+              transform: `translateX(${logoTranslation}px) scale(${interpolate(
+                logoScale,
+                [0, 1],
+                [1, 0.5]
+              )}) `,
+              height: "100%",
+              display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginLeft: 100,
-              fontFamily: "MonaSans",
-              fontSize: 120,
-              color: "black",
-              transform: `scale(${interpolate(
-                nameInitialScale,
-                [0, 1],
-                [1, 1.5]
-              )})`,
-              fontWeight: 500,
             }}
           >
-            {name}
-          </AbsoluteFill>
-        </Sequence>
+            <Img
+              src={logo}
+              style={{ width: "620px", height: "650px", borderRadius: "50%" }}
+            />
+          </div>
+          <Sequence from={70}>
+            <AbsoluteFill
+              style={{
+                justifyContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  transform: `scale(${interpolate(
+                    nameInitialScale,
+                    [0, 1],
+                    [0.5, 1]
+                  )})`,
+                }}
+              >
+                <p
+                  style={{
+                    float: "right",
+                    width: "70%",
+                    fontWeight: 500,
+                    fontFamily: "MonaSans",
+                    color: "black",
+                    fontSize: 180,
+                  }}
+                >
+                  {name}
+                </p>
+              </div>
+            </AbsoluteFill>
+          </Sequence>
+        </AbsoluteFill>
       </AbsoluteFill>
-      
-    </AbsoluteFill>
-    <Sequence from={150}>
+      <Sequence from={150}>
         <AbsoluteFill
           style={{
             justifyContent: "center",
             alignItems: "center",
             padding: "20px",
-            color: "black"
-            
+            textAlign: "center",
+            color: "black",
+            fontFamily: "MonoSans",
+            fontSize: 80,
+            transform: `scale(${textAnimate})`,
           }}
         >
-          <div
-            style={{
-              fontFamily: "MonoSans",
-              fontSize: 80,
-            }}
-          >
-            {textShown}
-          </div>
+          {oneliner}
         </AbsoluteFill>
       </Sequence>
     </AbsoluteFill>

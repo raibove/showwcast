@@ -2,13 +2,7 @@ import { useState, FormEvent } from "react";
 import "./User.css";
 import axios from "axios";
 import { Player } from "@remotion/player";
-import { Portfolio } from "../remotion/compositions/templates/portfolio/Portfolio";
 import { CompanyIntro } from "../remotion/compositions/templates/company/CompanyIntro";
-
-interface ActivityProps {
-  emoji: string;
-  message: string;
-}
 
 interface CompanyProps {
   name: string;
@@ -16,21 +10,10 @@ interface CompanyProps {
   oneLiner: string;
 }
 
-interface StackDetailProps {
-  id: number;
-  name: string;
-  iconUrl: string;
-}
-
-interface StackProps {
-  id: number;
-  stack: StackDetailProps;
-}
 
 const Company = () => {
   const [companyName, setCompanyName] = useState("");
   const [companyInfo, setCompanyInfo] = useState<CompanyProps | null>(null);
-  const [userStack, setUserStack] = useState<StackProps[]>([]);
 
   const updateCompanyName = (
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
