@@ -8,6 +8,7 @@ interface CompanyProps {
   name: string;
   logo: string;
   oneLiner: string;
+  location:string;
 }
 
 
@@ -47,9 +48,11 @@ const Company = () => {
               inputProps={{
                 name: companyInfo.name,
                 logo: companyInfo.logo,
-                oneliner: companyInfo.oneLiner
+                oneliner: companyInfo.oneLiner,
+                location: companyInfo.location,
+
               }}
-              durationInFrames={680}
+              durationInFrames={880}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}
