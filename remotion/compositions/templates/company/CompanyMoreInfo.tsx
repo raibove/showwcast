@@ -15,7 +15,9 @@ import locationIcon from "../../../../src/assets/map-pin.svg";
 
 export const CompanyMoreInfo: React.FC<{
   location: string;
-}> = ({ location }) => {
+  teamSize: string;
+  teamType: string;
+}> = ({ location, teamSize, teamType }) => {
   const frame = useCurrentFrame();
   const { fps, width } = useVideoConfig();
 
@@ -58,7 +60,7 @@ export const CompanyMoreInfo: React.FC<{
             transform: `scale(${teamSizeInitialScale})`,
           }}
         >
-          We are a Growing team of 15-20 people
+          We are a {teamType} of {teamSize} people
           <div
               style={{
                 justifyContent:'center',

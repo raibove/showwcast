@@ -9,13 +9,15 @@ export const CompanyIntro: React.FC<{
   logo: string;
   oneliner: string;
   location: string;
-}> = ({ name, logo, oneliner, location }) => {
+  teamSize: string;
+  teamType: string;
+}> = ({ name, logo, oneliner, location, teamSize, teamType }) => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#D4E0FF" }}>
-      <CompanyName name={name} logo={logo} oneliner={oneliner} />
+      <CompanyName name={name} logo={logo} oneliner={oneliner}/>
       <Sequence from={270}>
         <Transition>
-          <CompanyMoreInfo location={location}/>
+          <CompanyMoreInfo location={location} teamSize={teamSize} teamType={teamType}/>
         </Transition>
       </Sequence>
     </AbsoluteFill>
