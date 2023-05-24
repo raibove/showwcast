@@ -1,10 +1,18 @@
 .header{
-    display: flex;
     margin: 10px 20px;
+}
+
+.header-link{
+    text-decoration: none;
+}
+
+.header-logo{
+    display: flex;
     cursor: pointer;
 }
 
 .header-title{
+    color:#e9e3d9;
     font-size: 30px;
     line-height: 36px;
     font-weight: 400;

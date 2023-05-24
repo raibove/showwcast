@@ -42,6 +42,7 @@ export const CompanyMoreInfo: React.FC<{
 
   return (
     <AbsoluteFill style={{ backgroundColor: "white" }}>
+      <Sequence from={45}>
       <AbsoluteFill>
         <div>
           <Lottie animationData={team} />
@@ -71,6 +72,7 @@ export const CompanyMoreInfo: React.FC<{
             </div>
         </AbsoluteFill>
       </AbsoluteFill>
+      </Sequence>
       {/* <Sequence from={285}>
         <Transition>
           <AbsoluteFill

@@ -1,10 +1,9 @@
-import React from "react";
 import {
   AbsoluteFill,
   interpolate,
   spring,
   useCurrentFrame,
-  useVideoConfig,
+  useVideoConfig
 } from "remotion";
 
 export const Transition = ({ children }: any) => {
@@ -14,12 +13,13 @@ export const Transition = ({ children }: any) => {
     fps,
     frame,
     config: {
-      // mass: 0.1,
-      // damping: 00,
+      mass: 2,
+      damping: 200,
     },
   });
   const translation = interpolate(spr, [0, 1], [width, 0]);
   const perc = interpolate(spr, [0, 1], [50, 0]);
+
   return (
     <AbsoluteFill
       style={{

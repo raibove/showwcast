@@ -1,50 +1,40 @@
-import './App.css'
-import Header from './components/header/Header'
-import User from './User'
-import { useRoutes } from 'react-router-dom';
-import Company from './Company';
+import "./App.css";
+import Header from "./components/header/Header";
+import User from "./User";
+import { useRoutes } from "react-router-dom";
+import Company from "./Company";
+import NotFound from "./components/not-found/NotFound";
 
 const Layout = ({ routes }: any) => {
   return (
-    <div className='App'>
+    <div className="App">
       <Header />
-      {routes}
+      <div className="main-content">{routes}</div>
     </div>
   );
 };
-
-const ErrorPage = () => {
-  return (
-    <div>
-      <h2>Error: Page Not Found</h2>
-      <p>Lost into Darkness, see how others take the spotlight.</p>
-    </div>
-  );
-};
-
 
 function App() {
-
   const routes = useRoutes([
     {
-      path: '/',
-      element: <Company />
+      path: "/",
+      element: <Company />,
     },
     {
-      path: '/user',
-      element: <User />
+      path: "/user",
+      element: <User />,
     },
     {
-      path: '/company',
-      element: <Company />
+      path: "/company",
+      element: <Company />,
     },
     {
-      path: '*',
-      element: <ErrorPage />
-    }
+      path: "*",
+      element: <NotFound />,
+    },
   ]);
 
   return <Layout routes={routes} />;
 }
 
-export default App
+export default App;

@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@remotion/cli": "^3.3.91",
     "@remotion/lottie": "^3.3.91",
     "@remotion/player": "^3.3.91",
