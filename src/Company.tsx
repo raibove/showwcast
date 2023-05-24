@@ -22,10 +22,18 @@ const Company = () => {
     setCompanyName(e.currentTarget.value);
   };
 
+  const formatCompanyName = ()=>{
+    const newCompanyName = companyName.toLowerCase();
+    const companyArr = newCompanyName.split(" ");
+    return companyArr.join('-');
+  }
+
   const getCompany = async () => {
+    const formatedCompanyName = formatCompanyName();
+
     try {
       const res = await axios.get(
-        `https://cache.showwcase.com/companies/${companyName}`
+        `https://cache.showwcase.com/companies/${formatedCompanyName}`
       );
       console.log(res);
       setCompanyInfo(res.data);
