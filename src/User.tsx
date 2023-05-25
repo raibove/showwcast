@@ -1,8 +1,9 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, KeyboardEvent } from "react";
 import "./User.css";
 import axios from "axios";
 import { Player } from "@remotion/player";
 import { Portfolio } from "../remotion/compositions/templates/portfolio/Portfolio";
+import copy from "./assets/copy.svg";
 
 interface ActivityProps {
   emoji: string;
@@ -33,11 +34,13 @@ const User = () => {
   const [username, setUsername] = useState("");
   const [userInfo, setUserInfo] = useState<UserProps | null>(null);
   const [userStack, setUserStack] = useState<StackProps[]>([]);
+  const [showCopyUrl, setShowCopyUrl] = useState(false);
 
   const updateUsername = (
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setUsername(e.currentTarget.value);
+    setShowCopyUrl(false);
   };
 
   const getStacks = async () => {
@@ -47,8 +50,10 @@ const User = () => {
       );
       console.log(res);
       setUserStack(res.data);
+      setShowCopyUrl(true);
     } catch (err) {
       console.log(err);
+      setShowCopyUrl(false);
     }
   };
 
@@ -64,6 +69,16 @@ const User = () => {
       setUserInfo(null);
     }
   };
+
+  const handleKeypress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      getUser();
+    }
+  };
+
+  const generateUrl = ()=>{
+    console.log("url")
+  }
 
   return (
     <div className="container">
@@ -99,12 +114,18 @@ const User = () => {
       </div>
       <div className="form">
         <h3 className="title">Username</h3>
-        <input className="input" value={username} onChange={updateUsername} />
-        <br />
-        <br />
+        <input className="input" value={username} onChange={updateUsername} 
+          onKeyDown={handleKeypress}
+          />
         <button className="submit" onClick={getUser}>
           Submit
         </button>
+        {showCopyUrl === true && (
+          <button className="copy-url" onClick={generateUrl}>
+            <img src={copy} alt="copy" className="copy-url-icon" />
+            Copy URL
+          </button>
+        )}
       </div>
     </div>
   );

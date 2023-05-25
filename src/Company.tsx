@@ -1,9 +1,10 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, KeyboardEvent } from "react";
 import "./User.css";
 import axios from "axios";
 import { Player } from "@remotion/player";
 import { CompanyIntro } from "../remotion/compositions/templates/company/CompanyIntro";
-import owl from "./assets/owl.svg"
+import owl from "./assets/owl.svg";
+import copy from "./assets/copy.svg";
 
 interface CompanyProps {
   name: string;
@@ -17,11 +18,13 @@ interface CompanyProps {
 const Company = () => {
   const [companyName, setCompanyName] = useState("");
   const [companyInfo, setCompanyInfo] = useState<CompanyProps | null>(null);
+  const [showCopyUrl, setShowCopyUrl] = useState(false);
 
   const updateCompanyName = (
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setCompanyName(e.currentTarget.value);
+    setShowCopyUrl(false);
   };
 
   const formatCompanyName = () => {
@@ -46,10 +49,18 @@ const Company = () => {
         teamSize: res.data.size?.value || 10,
         teamType: res.data.size?.label || "Growing Team",
       };
-      console.log(newCompanyInfo);
+
       setCompanyInfo(newCompanyInfo);
+      setShowCopyUrl(true);
     } catch (err) {
       setCompanyInfo(null);
+      setShowCopyUrl(false);
+    }
+  };
+
+  const handleKeypress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      getCompany();
     }
   };
 
@@ -63,6 +74,8 @@ const Company = () => {
             }}
           >
             <Player
+              controls
+              loop
               component={CompanyIntro}
               inputProps={{
                 name: companyInfo.name,
@@ -79,7 +92,6 @@ const Company = () => {
               style={{
                 width: "100%",
               }}
-              controls
             />
           </div>
         )}
@@ -90,12 +102,17 @@ const Company = () => {
           className="input"
           value={companyName}
           onChange={updateCompanyName}
+          onKeyDown={handleKeypress}
         />
-        <br />
-        <br />
         <button className="submit" onClick={getCompany}>
           Submit
         </button>
+        {showCopyUrl === true && (
+          <button className="copy-url" onClick={getCompany}>
+            <img src={copy} alt="copy" className="copy-url-icon" />
+            Copy URL
+          </button>
+        )}
       </div>
     </div>
   );

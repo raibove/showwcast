@@ -44,36 +44,36 @@ export const CompanyMoreInfo: React.FC<{
 
   return (
     <AbsoluteFill style={{ backgroundColor: "white" }}>
-      <Sequence from={40}>
-      <AbsoluteFill>
-        <div>
-          <Lottie animationData={team} />
-        </div>
-        <AbsoluteFill
-          style={{
-            textAlign: "center",
-            marginTop: 80,
-            fontSize: 70,
-            fontWeight: 550,
-            fontFamily: "Cursive",
-            color: "black",
-            transform: `scale(${teamSizeInitialScale})`,
-          }}
-        >
-          We are a {teamType} of {teamSize} people
-          <div
+      <Sequence from={28}>
+        <AbsoluteFill>
+          <div>
+            <Lottie animationData={team} />
+          </div>
+          <AbsoluteFill
+            style={{
+              textAlign: "center",
+              marginTop: 80,
+              fontSize: 70,
+              fontWeight: 550,
+              fontFamily: "Cursive",
+              color: "black",
+              transform: `scale(${teamSizeInitialScale})`,
+            }}
+          >
+            We are a {teamType} of {teamSize} people
+            <div
               style={{
-                justifyContent:'center',
-                display:'flex',
-                backgroundColor:'rgba(255, 244, 79, 1)',
+                justifyContent: "center",
+                display: "flex",
+                backgroundColor: "rgba(255, 244, 79, 1)",
                 clipPath: `inset(0 ${title1Animation}% 0 0)`,
               }}
             >
               <Img src={locationIcon} style={{ width: 120, height: 100 }} />
               Located in {location}
             </div>
+          </AbsoluteFill>
         </AbsoluteFill>
-      </AbsoluteFill>
       </Sequence>
       {/* <Sequence from={285}>
         <Transition>
