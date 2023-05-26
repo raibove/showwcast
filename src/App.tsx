@@ -5,6 +5,7 @@ import { useRoutes } from "react-router-dom";
 import Company from "./Company";
 import NotFound from "./components/not-found/NotFound";
 import { Menu } from "./Menu";
+import { Home } from "./Home";
 
 const Layout = ({ routes }: any) => {
   return (
@@ -20,7 +21,7 @@ function App() {
   const routes = useRoutes([
     {
       path: "/",
-      element: <Company />,
+      element: <Home />,
     },
     {
       path: "/user",

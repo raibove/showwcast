@@ -3,15 +3,20 @@
     justify-content: space-around;
     padding: 5px 9px;
     margin: 0 180px;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+    list-style: none;
 }
 
 .menu-item{
     text-align: center;
     padding: 12px 10px;
-    min-width: 80px;
+    min-width: 100px;
     border-radius: 15px;
     cursor: pointer;
     font-weight: bold;
-    background-color: white;
+    background-color: #e9e3d9;
     color: black;
+    flex-grow: 1;
 }

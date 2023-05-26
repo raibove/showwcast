@@ -20,6 +20,11 @@ export const Menu = () => {
                 <span>🏢 Company</span>
             </li>
         </Link>
+        <Link to="/events" className="header-link">
+            <li className="menu-item">
+                <span>📅 Events</span>
+            </li>
+        </Link>
       </ul>
     </nav>
   );
