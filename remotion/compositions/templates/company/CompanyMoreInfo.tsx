@@ -32,6 +32,7 @@ export const CompanyMoreInfo: React.FC<{
   });
 
   return (
+    <>
     <AbsoluteFill style={{ backgroundColor: "white" }}>
       <Sequence from={28}>
         <AbsoluteFill>
@@ -46,8 +47,7 @@ export const CompanyMoreInfo: React.FC<{
               fontWeight: 550,
               fontFamily: "Cursive",
               color: "black",
-              transform: `scale(${teamS
-                izeInitialScale})`,
+              transform: `scale(${teamSizeInitialScale})`,
             }}
           >
             We are a {teamType} of {teamSize} people
@@ -66,5 +66,6 @@ export const CompanyMoreInfo: React.FC<{
         </AbsoluteFill>
       </Sequence>
     </AbsoluteFill>
+    </>
   );
 };

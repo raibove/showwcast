@@ -8,6 +8,10 @@ import copy from "./assets/copy.svg";
 import { Instruction } from "../remotion/compositions/instruction/Instruction";
 import { Error } from "../remotion/compositions/error/Error";
 
+interface SocialProp{
+  value: string;
+}
+
 interface CompanyProps {
   name: string;
   logo: string;
@@ -15,6 +19,8 @@ interface CompanyProps {
   location: string;
   teamSize: string;
   teamType: string;
+  url: string;
+  socials: string[];
 }
 
 const Company = () => {
@@ -45,6 +51,12 @@ const Company = () => {
         `https://cache.showwcase.com/companies/${formatedCompanyName}`
       );
 
+      const socials: string[] = []
+      
+      res.data.socials && res.data.socials.forEach((social: SocialProp)=>{
+        socials.push(social.value)
+      })
+
       const newCompanyInfo = {
         name: res.data.name || "Company",
         logo: res.data.logo || owl,
@@ -52,7 +64,10 @@ const Company = () => {
         location: res.data.location || "World",
         teamSize: res.data.size?.value || 10,
         teamType: res.data.size?.label || "Growing Team",
+        url: res.data.url || "https://www.showwcase.com",
+        socials: socials,
       };
+
       setCompanyInfo(newCompanyInfo);
       setShowCopyUrl(true);
       setShowError(false);
@@ -110,6 +125,22 @@ const Company = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const getSocials = ()=>{
+    const socials: string[] = []
+   
+    if(companyInfo && companyInfo.url){
+      socials.push(companyInfo.url)
+    }
+
+    if(companyInfo && companyInfo.socials){
+      companyInfo.socials.forEach((social)=>{
+        socials.push(social)
+      })
+    }
+
+    return socials;
+  }
+
   return (
     <div className="container">
       <div className="player">
@@ -121,7 +152,6 @@ const Company = () => {
           >
             <Player
               controls
-              loop
               component={CompanyIntro}
               inputProps={{
                 name: companyInfo.name,
@@ -130,8 +160,9 @@ const Company = () => {
                 location: companyInfo.location,
                 teamSize: companyInfo.teamSize,
                 teamType: companyInfo.teamType,
+                socials: getSocials()
               }}
-              durationInFrames={880}
+              durationInFrames={1080}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}
