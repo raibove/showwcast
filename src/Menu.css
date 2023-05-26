@@ -1,0 +1,17 @@
+.menu-list{
+    display: flex;
+    justify-content: space-around;
+    padding: 5px 9px;
+    margin: 0 180px;
+}
+
+.menu-item{
+    text-align: center;
+    padding: 12px 10px;
+    min-width: 80px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+}

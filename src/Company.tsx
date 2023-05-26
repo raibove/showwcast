@@ -109,8 +109,8 @@ const Company = () => {
         </button>
         {showCopyUrl === true && (
           <button className="copy-url" onClick={getCompany}>
-            <img src={copy} alt="copy" className="copy-url-icon" />
             Copy URL
+            <img src={copy} alt="copy" className="copy-url-icon" />
           </button>
         )}
       </div>

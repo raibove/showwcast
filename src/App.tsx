@@ -4,11 +4,13 @@ import User from "./User";
 import { useRoutes } from "react-router-dom";
 import Company from "./Company";
 import NotFound from "./components/not-found/NotFound";
+import { Menu } from "./Menu";
 
 const Layout = ({ routes }: any) => {
   return (
     <div className="App">
       <Header />
+      <Menu />
       <div className="main-content">{routes}</div>
     </div>
   );
