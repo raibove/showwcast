@@ -33,7 +33,7 @@ export const WebTechnologies: React.FC<{ technology: Technology[] }> = ({
   return (
     <AbsoluteFill
       style={{
-        // backgroundColor: "#F0F4FF",
+        // backgroundColor: "#B98B82",
         backgroundColor: 'rgb(226 228 221)'
       }}
     >
@@ -95,7 +95,7 @@ export const WebTechnologies: React.FC<{ technology: Technology[] }> = ({
                     >
                       <Img
                         src={t.iconUrl}
-                        style={{ width: 130, height: 130 }}
+                        style={{ width: 160, height: 160 }}
                       />
                     </div>
                     //   <div

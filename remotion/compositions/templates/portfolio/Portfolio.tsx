@@ -3,7 +3,8 @@ import React from "react";
 import { WebTechnologies } from "./WebTechnologies";
 import { UserProfile } from "./UserProfile";
 import { UserInfo } from "./UserInfo";
-import { AboutUser } from "./AboutUser";
+import { UserAbout } from "./UserAbout";
+import {Transition} from "../company/Transition"
 import userAudio from "../../../../src/assets/user-audio.mp3";
 
 // CFFFB3
@@ -57,8 +58,12 @@ export const Portfolio: React.FC<{
       <Sequence from={0} durationInFrames={550} name="Event image">
         <UserProfile title={title} src={src} />
         <UserInfo location={location} headline={headline} activity={activity} />
-        <AboutUser about={about} />
-        <Sequence from={350}>
+        <Sequence from={200}>
+        <Transition>
+        <UserAbout about={about} />
+        </Transition>
+        </Sequence>
+        <Sequence from={400}>
           <WebTechnologies technology={getTechnology()}/>
         </Sequence>
       </Sequence>

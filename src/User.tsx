@@ -122,8 +122,8 @@ const User = () => {
         </button>
         {showCopyUrl === true && (
           <button className="copy-url" onClick={generateUrl}>
-            <img src={copy} alt="copy" className="copy-url-icon" />
             Copy URL
+            <img src={copy} alt="copy" className="copy-url-icon" />
           </button>
         )}
       </div>

@@ -95,7 +95,7 @@
 .copy-url-icon {
   width: 20px;
   height: 20px;
-  padding-right: 15px;
+  padding:0 15px;
 }
 
 @media only screen and (max-width: 580px) {

@@ -1,7 +1,7 @@
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import React from "react";
 
-export const AboutUser: React.FC<{
+export const UserAbout: React.FC<{
   about: string;
 }> = ({ about }) => {
   const frame = useCurrentFrame();
@@ -13,8 +13,8 @@ export const AboutUser: React.FC<{
   return (
     <AbsoluteFill
       style={{
-        transform: `translateY(${slideProgress}%)`,
-        backgroundColor: "#3D348B",
+        // transform: `translateY(${slideProgress}%)`,
+        backgroundColor: "#573280",
       }}
     >
       <p
