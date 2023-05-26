@@ -6,7 +6,7 @@ export const Home = () => {
     <div
       style={{
         position: "relative",
-        margin: "auto",
+        margin: "60px auto",
         width: "65vw",
       }}
     >

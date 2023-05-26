@@ -1,21 +1,13 @@
-import React, { ReactElement } from "react";
-import {
-  Audio,
-  useCurrentFrame,
-  useVideoConfig,
-  interpolate,
-  AbsoluteFill,
-  Sequence,
-} from "remotion";
+import React from "react";
+import { Audio, AbsoluteFill, Sequence, Img } from "remotion";
 import "./Intro.css";
 import stomp from "../../../src/assets/stomp.mp3";
+import owl from "../../../src/assets/owl.svg";
 
 export const Intro: React.FC = () => {
-  const { fps, width, height, durationInFrames } = useVideoConfig();
+  const text =
+    "Introducing Showwcast! The Video Platform for the Showwcase Community!";
 
-  const text = "Introducing Showwcast!! The Video Platform for the Showwcase Community!";
-
-    
   return (
     <>
       <AbsoluteFill className="intro-video">
@@ -26,12 +18,23 @@ export const Intro: React.FC = () => {
             alignItems: "center",
           }}
         >
+          <Sequence
+            from={0}
+            durationInFrames={1}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Img src={owl} style={{ height: "80vh", width: "80%" }} />
+          </Sequence>
           {text.split(" ").map((item, index) => {
             return (
               <Sequence
                 key={index}
                 durationInFrames={15}
-                from={16 * index}
+                from={18 * index + 1}
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -57,7 +60,6 @@ export const Intro: React.FC = () => {
             );
           })}
         </div>
-
         <Audio src={stomp} />
       </AbsoluteFill>
     </>
