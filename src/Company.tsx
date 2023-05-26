@@ -104,7 +104,7 @@ const Company = () => {
 
     if (nameParam) {
       setCompanyName(nameParam);
-      setShowCopyUrl(true)
+      setShowCopyUrl(true);
       getCompany(nameParam);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -174,7 +174,7 @@ const Company = () => {
               inputProps={{
                 error: "company name",
               }}
-              durationInFrames={200}
+              durationInFrames={400}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}

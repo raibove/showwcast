@@ -46,7 +46,8 @@ export const CompanyMoreInfo: React.FC<{
               fontWeight: 550,
               fontFamily: "Cursive",
               color: "black",
-              transform: `scale(${teamSizeInitialScale})`,
+              transform: `scale(${teamS
+                izeInitialScale})`,
             }}
           >
             We are a {teamType} of {teamSize} people

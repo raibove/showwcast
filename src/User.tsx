@@ -188,7 +188,7 @@ const User = () => {
               inputProps={{
                 error: "user name",
               }}
-              durationInFrames={200}
+              durationInFrames={400}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}
