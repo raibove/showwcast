@@ -6,7 +6,7 @@ import { CompanyIntro } from "../remotion/compositions/templates/company/Company
 import owl from "./assets/owl.svg";
 import copy from "./assets/copy.svg";
 import { Instruction } from "../remotion/compositions/instruction/Instruction";
-import {Error} from "../remotion/compositions/error/Error";
+import { Error } from "../remotion/compositions/error/Error";
 
 interface CompanyProps {
   name: string;
@@ -22,7 +22,7 @@ const Company = () => {
   const [companyInfo, setCompanyInfo] = useState<CompanyProps | null>(null);
   const [showCopyUrl, setShowCopyUrl] = useState(false);
   const [showError, setShowError] = useState(false);
-	const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const updateCompanyName = (
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
@@ -31,14 +31,14 @@ const Company = () => {
     setShowCopyUrl(false);
   };
 
-  const formatCompanyName = () => {
-    const newCompanyName = companyName.toLowerCase();
-    const companyArr = newCompanyName.split(" ");
+  const formatCompanyName = (newCompanyName: string) => {
+    const currentCompanyName = newCompanyName.toLowerCase();
+    const companyArr = currentCompanyName.split(" ");
     return companyArr.join("-");
   };
 
-  const getCompany = async () => {
-    const formatedCompanyName = formatCompanyName();
+  const getCompany = async (newCompanyName = companyName) => {
+    const formatedCompanyName = formatCompanyName(newCompanyName);
 
     try {
       const res = await axios.get(
@@ -53,16 +53,12 @@ const Company = () => {
         teamSize: res.data.size?.value || 10,
         teamType: res.data.size?.label || "Growing Team",
       };
-
-      console.log(formatedCompanyName)
-
-      console.log(res)
       setCompanyInfo(newCompanyInfo);
       setShowCopyUrl(true);
-      setShowError(false)
+      setShowError(false);
     } catch (err) {
       setCompanyInfo(null);
-      setShowError(true)
+      setShowError(true);
       setShowCopyUrl(false);
     }
   };
@@ -73,39 +69,46 @@ const Company = () => {
     }
   };
 
-  const instructions = [{
-    id: 0,
-    title: "To create a video of a company from the template"
-}
-    , {
-    id: 1, title:
-        "Enter the company name from the showwcase profile"
-},
-{ id: 2, title: "and click on submit" },
-{
-    id: 3, title:
-        "Now you have a video and a URL which you can share with the community."
-}];
+  const instructions = [
+    {
+      id: 0,
+      title: "To create a video of a company from the template",
+    },
+    {
+      id: 1,
+      title: "Enter the company name from the showwcase profile",
+    },
+    { id: 2, title: "and click on submit" },
+    {
+      id: 3,
+      title:
+        "Now you have a video and a URL which you can share with the community.",
+    },
+  ];
 
-const copyURLWithQueryParams = () => {
-  const queryParams = new URLSearchParams(window.location.search);
-  queryParams.set("name", companyName);
+  const copyURLWithQueryParams = () => {
+    const queryParams = new URLSearchParams(window.location.search);
+    queryParams.set("name", companyName);
 
-  const modifiedURL = `${window.location.origin}${window.location.pathname}?${queryParams.toString()}`;
-  navigator.clipboard.writeText(modifiedURL);
-  setCopied(true);
-  setTimeout(() => setCopied(false), 2000);
-};
+    const modifiedURL = `${window.location.origin}${
+      window.location.pathname
+    }?${queryParams.toString()}`;
+    navigator.clipboard.writeText(modifiedURL);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-useEffect(() => {
-  const queryParams = new URLSearchParams(window.location.search);
-  const nameParam = queryParams.get("name");
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const nameParam = queryParams.get("name");
 
-  if (nameParam) {
-    setCompanyName(nameParam);
-    getCompany();
-  }
-}, []);
+    if (nameParam) {
+      setCompanyName(nameParam);
+      setShowCopyUrl(true)
+      getCompany(nameParam);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="container">
@@ -138,7 +141,8 @@ useEffect(() => {
             />
           </div>
         )}
-        {!showCopyUrl && !showError && <div
+        {!showCopyUrl && !showError && (
+          <div
             style={{
               position: "relative",
             }}
@@ -146,7 +150,7 @@ useEffect(() => {
             <Player
               component={Instruction}
               inputProps={{
-                instructions: instructions
+                instructions: instructions,
               }}
               durationInFrames={800}
               compositionWidth={1800}
@@ -157,8 +161,10 @@ useEffect(() => {
               }}
               controls
             />
-          </div>}
-          {!showCopyUrl && showError && <div
+          </div>
+        )}
+        {!showCopyUrl && showError && (
+          <div
             style={{
               position: "relative",
             }}
@@ -166,7 +172,7 @@ useEffect(() => {
             <Player
               component={Error}
               inputProps={{
-                error: "company name"
+                error: "company name",
               }}
               durationInFrames={200}
               compositionWidth={1800}
@@ -177,7 +183,8 @@ useEffect(() => {
               }}
               controls
             />
-          </div>}
+          </div>
+        )}
       </div>
       <div className="form">
         <h3 className="title">Company Name</h3>
@@ -187,14 +194,19 @@ useEffect(() => {
           onChange={updateCompanyName}
           onKeyDown={handleKeypress}
         />
-        <button className="submit" onClick={getCompany}>
+        <button className="submit" onClick={() => getCompany()}>
           Submit
         </button>
         {showCopyUrl === true && (
           <button className="copy-url" onClick={copyURLWithQueryParams}>
-            {copied ? 'Copied ✅': <span className="copy-url-text">Copy URL
-            <img src={copy} alt="copy" className="copy-url-icon" /></span>
-            }
+            {copied ? (
+              "Copied ✅"
+            ) : (
+              <span className="copy-url-text">
+                Copy URL
+                <img src={copy} alt="copy" className="copy-url-icon" />
+              </span>
+            )}
           </button>
         )}
       </div>
