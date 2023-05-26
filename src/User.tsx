@@ -81,6 +81,20 @@ const User = () => {
     console.log("url")
   }
 
+  const instructions = [{
+    id: 0,
+    title: "To create a video of your user-profile"
+}
+    , {
+    id: 1, title:
+        "Enter the username name from the showwcase profile"
+},
+{ id: 2, title: "and click on submit" },
+{
+    id: 3, title:
+        "Now you have a video and a URL which you can share with the community."
+}];
+
   return (
     <div className="container">
       <div className="player">
@@ -101,7 +115,7 @@ const User = () => {
                 headline: userInfo.headline,
                 techStack: userStack,
               }}
-              durationInFrames={680}
+              durationInFrames={860}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}
@@ -120,6 +134,7 @@ const User = () => {
             <Player
               component={Instruction}
               inputProps={{
+                instructions: instructions
               }}
               durationInFrames={680}
               compositionWidth={1800}

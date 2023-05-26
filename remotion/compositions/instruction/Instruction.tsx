@@ -7,20 +7,15 @@ import { Transition } from "../templates/company/Transition";
 import instructionAudio from "../../../src/assets/instruction-audio.mp3";
 
 
-export const Instruction: React.FC = () => {
-    const text = [{
-        id: 0,
-        title: "To create a video of a company from the template"
-    }
-        , {
-        id: 1, title:
-            "Enter the company name from the showwcase profile"
-    },
-    { id: 2, title: "and click on submit" },
-    {
-        id: 3, title:
-            "Now you have a video and a URL which you can share with the community."
-    }];
+interface InstructionProp {
+ id: number;
+ title: string;
+}
+
+export const Instruction: React.FC<{
+    instructions: InstructionProp[] 
+}> = ({instructions}) => {
+   
 
     const getColor = (index: number) => {
         console.log(index)
@@ -39,12 +34,12 @@ export const Instruction: React.FC = () => {
                     </AbsoluteFill>
                 </Sequence>
                 <AbsoluteFill>
-                    {text.map((t, index) => {
+                    {instructions.map((instruction, index) => {
                         return (
                             <Sequence from={220 + (index * 130)} key={index}>
                                 <Transition>
                                     <AbsoluteFill className="instruction-content" style={{ backgroundColor: getColor(index) }}>
-                                        {t.title}
+                                        {instruction.title}
                                     </AbsoluteFill>
                                 </Transition>
                             </Sequence>

@@ -5,6 +5,7 @@ import { Player } from "@remotion/player";
 import { CompanyIntro } from "../remotion/compositions/templates/company/CompanyIntro";
 import owl from "./assets/owl.svg";
 import copy from "./assets/copy.svg";
+import { Instruction } from "../remotion/compositions/instruction/Instruction";
 
 interface CompanyProps {
   name: string;
@@ -64,10 +65,24 @@ const Company = () => {
     }
   };
 
+  const instructions = [{
+    id: 0,
+    title: "To create a video of a company from the template"
+}
+    , {
+    id: 1, title:
+        "Enter the company name from the showwcase profile"
+},
+{ id: 2, title: "and click on submit" },
+{
+    id: 3, title:
+        "Now you have a video and a URL which you can share with the community."
+}];
+
   return (
     <div className="container">
       <div className="player">
-        {companyInfo !== null && (
+        {showCopyUrl === true && companyInfo !== null && (
           <div
             style={{
               position: "relative",
@@ -95,6 +110,26 @@ const Company = () => {
             />
           </div>
         )}
+        {!showCopyUrl && <div
+            style={{
+              position: "relative",
+            }}
+          >
+            <Player
+              component={Instruction}
+              inputProps={{
+                instructions: instructions
+              }}
+              durationInFrames={860}
+              compositionWidth={1800}
+              compositionHeight={1080}
+              fps={30}
+              style={{
+                width: "100%",
+              }}
+              controls
+            />
+          </div>}
       </div>
       <div className="form">
         <h3 className="title">Company Name</h3>
