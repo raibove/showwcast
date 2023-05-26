@@ -1,4 +1,4 @@
-import { useState, FormEvent, KeyboardEvent } from "react";
+import { useState, FormEvent, KeyboardEvent, useEffect } from "react";
 import "./User.css";
 import axios from "axios";
 import { Player } from "@remotion/player";
@@ -54,6 +54,9 @@ const Company = () => {
         teamType: res.data.size?.label || "Growing Team",
       };
 
+      console.log(formatedCompanyName)
+
+      console.log(res)
       setCompanyInfo(newCompanyInfo);
       setShowCopyUrl(true);
       setShowError(false)
@@ -93,6 +96,16 @@ const copyURLWithQueryParams = () => {
   setCopied(true);
   setTimeout(() => setCopied(false), 2000);
 };
+
+useEffect(() => {
+  const queryParams = new URLSearchParams(window.location.search);
+  const nameParam = queryParams.get("name");
+
+  if (nameParam) {
+    setCompanyName(nameParam);
+    getCompany();
+  }
+}, []);
 
   return (
     <div className="container">
