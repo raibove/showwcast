@@ -6,6 +6,7 @@ import { CompanyIntro } from "../remotion/compositions/templates/company/Company
 import owl from "./assets/owl.svg";
 import copy from "./assets/copy.svg";
 import { Instruction } from "../remotion/compositions/instruction/Instruction";
+import {Error} from "../remotion/compositions/error/Error";
 
 interface CompanyProps {
   name: string;
@@ -20,6 +21,7 @@ const Company = () => {
   const [companyName, setCompanyName] = useState("");
   const [companyInfo, setCompanyInfo] = useState<CompanyProps | null>(null);
   const [showCopyUrl, setShowCopyUrl] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const updateCompanyName = (
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
@@ -53,8 +55,10 @@ const Company = () => {
 
       setCompanyInfo(newCompanyInfo);
       setShowCopyUrl(true);
+      setShowError(false)
     } catch (err) {
       setCompanyInfo(null);
+      setShowError(true)
       setShowCopyUrl(false);
     }
   };
@@ -110,7 +114,7 @@ const Company = () => {
             />
           </div>
         )}
-        {!showCopyUrl && <div
+        {!showCopyUrl && !showError && <div
             style={{
               position: "relative",
             }}
@@ -120,7 +124,27 @@ const Company = () => {
               inputProps={{
                 instructions: instructions
               }}
-              durationInFrames={860}
+              durationInFrames={800}
+              compositionWidth={1800}
+              compositionHeight={1080}
+              fps={30}
+              style={{
+                width: "100%",
+              }}
+              controls
+            />
+          </div>}
+          {!showCopyUrl && showError && <div
+            style={{
+              position: "relative",
+            }}
+          >
+            <Player
+              component={Error}
+              inputProps={{
+                error: "company name"
+              }}
+              durationInFrames={200}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}

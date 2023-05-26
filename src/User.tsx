@@ -5,6 +5,7 @@ import { Player } from "@remotion/player";
 import { Portfolio } from "../remotion/compositions/templates/portfolio/Portfolio";
 import copy from "./assets/copy.svg";
 import {Instruction} from "../remotion/compositions/instruction/Instruction"
+import {Error} from "../remotion/compositions/error/Error";
 
 interface ActivityProps {
   emoji: string;
@@ -36,6 +37,7 @@ const User = () => {
   const [userInfo, setUserInfo] = useState<UserProps | null>(null);
   const [userStack, setUserStack] = useState<StackProps[]>([]);
   const [showCopyUrl, setShowCopyUrl] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const updateUsername = (
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
@@ -52,9 +54,11 @@ const User = () => {
       console.log(res);
       setUserStack(res.data);
       setShowCopyUrl(true);
+      setShowError(false);
     } catch (err) {
       console.log(err);
       setShowCopyUrl(false);
+      setShowError(true);
     }
   };
 
@@ -66,8 +70,10 @@ const User = () => {
       console.log(res);
       setUserInfo(res.data);
       getStacks();
+
     } catch (err) {
       setUserInfo(null);
+      setShowError(true)
     }
   };
 
@@ -115,7 +121,7 @@ const User = () => {
                 headline: userInfo.headline,
                 techStack: userStack,
               }}
-              durationInFrames={860}
+              durationInFrames={680}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}
@@ -126,7 +132,7 @@ const User = () => {
             />
           </div>
         )}
-        {!showCopyUrl && <div
+        {!showCopyUrl  && !showError && <div
             style={{
               position: "relative",
             }}
@@ -136,7 +142,27 @@ const User = () => {
               inputProps={{
                 instructions: instructions
               }}
-              durationInFrames={680}
+              durationInFrames={800}
+              compositionWidth={1800}
+              compositionHeight={1080}
+              fps={30}
+              style={{
+                width: "100%",
+              }}
+              controls
+            />
+          </div>}
+          {!showCopyUrl && showError && <div
+            style={{
+              position: "relative",
+            }}
+          >
+            <Player
+              component={Error}
+              inputProps={{
+                error: "user name"
+              }}
+              durationInFrames={200}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}
