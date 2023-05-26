@@ -1,9 +1,10 @@
-import { Sequence } from "remotion";
+import { Sequence, Audio } from "remotion";
 import React from "react";
 import { WebTechnologies } from "./WebTechnologies";
 import { UserProfile } from "./UserProfile";
 import { UserInfo } from "./UserInfo";
 import { AboutUser } from "./AboutUser";
+import userAudio from "../../../../src/assets/user-audio.mp3";
 
 // CFFFB3
 // FCEC52
@@ -61,6 +62,7 @@ export const Portfolio: React.FC<{
           <WebTechnologies technology={getTechnology()}/>
         </Sequence>
       </Sequence>
+      <Audio src={userAudio} />
     </>
   );
 };
