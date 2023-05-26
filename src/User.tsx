@@ -4,6 +4,7 @@ import axios from "axios";
 import { Player } from "@remotion/player";
 import { Portfolio } from "../remotion/compositions/templates/portfolio/Portfolio";
 import copy from "./assets/copy.svg";
+import {Instruction} from "../remotion/compositions/instruction/Instruction"
 
 interface ActivityProps {
   emoji: string;
@@ -76,14 +77,14 @@ const User = () => {
     }
   };
 
-  const generateUrl = ()=>{
+  const generateUrl = () => {
     console.log("url")
   }
 
   return (
     <div className="container">
       <div className="player">
-        {userInfo !== null && (
+        {showCopyUrl === true && userInfo !== null && (
           <div
             style={{
               position: "relative",
@@ -111,12 +112,31 @@ const User = () => {
             />
           </div>
         )}
+        {!showCopyUrl && <div
+            style={{
+              position: "relative",
+            }}
+          >
+            <Player
+              component={Instruction}
+              inputProps={{
+              }}
+              durationInFrames={680}
+              compositionWidth={1800}
+              compositionHeight={1080}
+              fps={30}
+              style={{
+                width: "100%",
+              }}
+              controls
+            />
+          </div>}
       </div>
       <div className="form">
         <h3 className="title">Username</h3>
-        <input className="input" value={username} onChange={updateUsername} 
+        <input className="input" value={username} onChange={updateUsername}
           onKeyDown={handleKeypress}
-          />
+        />
         <button className="submit" onClick={getUser}>
           Submit
         </button>
