@@ -33,7 +33,6 @@ export const WebTechnologies: React.FC<{ technology: Technology[] }> = ({
   return (
     <AbsoluteFill
       style={{
-        // backgroundColor: "#B98B82",
         backgroundColor: 'rgb(226 228 221)'
       }}
     >
@@ -98,23 +97,6 @@ export const WebTechnologies: React.FC<{ technology: Technology[] }> = ({
                         style={{ width: 160, height: 160 }}
                       />
                     </div>
-                    //   <div
-                    //     style={{
-                    //       color: 'red',
-                    //       transform: `translateY(${interpolate(
-                    //         pos,
-                    //         [0, 1],
-                    //         [200, 0]
-                    //       )}px)`,
-                    //       opacity: pos,
-                    //       fontSize: '6em',
-                    //       lineHeight: "1.5em",
-                    //       fontFamily: "Cursive",
-                    //       textAlign:'center'
-                    //       }}
-                    //   >
-                    //     {t.name}
-                    //   </div>
                   );
                 })}
               </div>

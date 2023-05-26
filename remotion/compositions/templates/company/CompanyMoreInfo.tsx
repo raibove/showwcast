@@ -10,7 +10,6 @@ import {
 } from "remotion";
 import { Lottie } from "@remotion/lottie";
 import team from "../../../../src/assets/team.json";
-import { Transition } from "./Transition";
 import locationIcon from "../../../../src/assets/map-pin.svg";
 
 export const CompanyMoreInfo: React.FC<{
@@ -19,19 +18,9 @@ export const CompanyMoreInfo: React.FC<{
   teamType: string;
 }> = ({ location, teamSize, teamType }) => {
   const frame = useCurrentFrame();
-  const { fps, width } = useVideoConfig();
+  const { fps } = useVideoConfig();
 
   const title1Animation = interpolate(frame, [215, 240], [100, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
-  const title2Animation = interpolate(frame, [355, 380], [100, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
-  const title3Animation = interpolate(frame, [395, 410], [100, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -75,55 +64,6 @@ export const CompanyMoreInfo: React.FC<{
           </AbsoluteFill>
         </AbsoluteFill>
       </Sequence>
-      {/* <Sequence from={285}>
-        <Transition>
-          <AbsoluteFill
-            style={{
-              fontFamily: "MonaSans",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "space-evenly",
-              color: "black",
-              // top: "50%",
-              // transform: "translateY(-50%)",
-              textAlign: "center",
-              backgroundColor: "#D4E0FF",
-            }}
-          >
-            <div
-              style={{
-                justifyContent:'center',
-                display:'flex',
-                fontWeight: 800,
-                fontSize: 80,
-                clipPath: `inset(0 ${title1Animation}% 0 0)`,
-              }}
-            >
-              <Img src={locationIcon} style={{ width: 120, height: 100 }} />
-              Located in {location}
-            </div>
-            <div
-              style={{
-                fontWeight: 800,
-                fontSize: 80,
-                clipPath: `inset(0 ${title2Animation}% 0 0)`,
-              }}
-            >
-              Use
-            </div>
-            <div
-              style={{
-                fontWeight: 800,
-                fontSize: 80,
-                clipPath: `inset(0 ${title3Animation}% 0 0)`,
-              }}
-            >
-              We build cool stuff with our CEO,
-            </div>
-          </AbsoluteFill>
-        </Transition>
-      </Sequence> */}
     </AbsoluteFill>
   );
 };

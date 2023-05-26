@@ -1,5 +1,5 @@
 import React from "react";
-import { Audio, AbsoluteFill, Sequence, Img } from "remotion";
+import { Audio, AbsoluteFill, Sequence } from "remotion";
 import "./Instruction.css";
 import { Lottie } from "@remotion/lottie";
 import hello from "../../../src/assets/hello.json"
