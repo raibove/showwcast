@@ -22,6 +22,7 @@ const Company = () => {
   const [companyInfo, setCompanyInfo] = useState<CompanyProps | null>(null);
   const [showCopyUrl, setShowCopyUrl] = useState(false);
   const [showError, setShowError] = useState(false);
+	const [copied, setCopied] = useState(false);
 
   const updateCompanyName = (
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
@@ -82,6 +83,16 @@ const Company = () => {
     id: 3, title:
         "Now you have a video and a URL which you can share with the community."
 }];
+
+const copyURLWithQueryParams = () => {
+  const queryParams = new URLSearchParams(window.location.search);
+  queryParams.set("name", companyName);
+
+  const modifiedURL = `${window.location.origin}${window.location.pathname}?${queryParams.toString()}`;
+  navigator.clipboard.writeText(modifiedURL);
+  setCopied(true);
+  setTimeout(() => setCopied(false), 2000);
+};
 
   return (
     <div className="container">
@@ -167,9 +178,10 @@ const Company = () => {
           Submit
         </button>
         {showCopyUrl === true && (
-          <button className="copy-url" onClick={getCompany}>
-            Copy URL
-            <img src={copy} alt="copy" className="copy-url-icon" />
+          <button className="copy-url" onClick={copyURLWithQueryParams}>
+            {copied ? 'Copied ✅': <span className="copy-url-text">Copy URL
+            <img src={copy} alt="copy" className="copy-url-icon" /></span>
+            }
           </button>
         )}
       </div>

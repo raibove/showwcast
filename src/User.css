@@ -83,6 +83,11 @@
   justify-content: center;
 }
 
+.copy-url-text{
+  display: flex;
+  justify-content: center;
+}
+
 .copy-url:hover {
   border-color: #f5deb3;
 }
