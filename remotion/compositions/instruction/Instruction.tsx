@@ -18,7 +18,6 @@ export const Instruction: React.FC<{
    
 
     const getColor = (index: number) => {
-        console.log(index)
         if (index % 2 === 0) {
             return '#00ddb3'
         }

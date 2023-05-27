@@ -19,6 +19,10 @@ interface UserProps {
   location?: string;
   activity: ActivityProps;
   headline?: string;
+  totalFollowers: number;
+  totalWorkedWiths: number;
+  totalThreads: number;
+  engagement: {totalPublishedShows: number;};
 }
 
 interface StackDetailProps {
@@ -52,12 +56,10 @@ const User = () => {
       const res = await axios.get(
         `https://cache.showwcase.com/user/${newUsername}/stacks`
       );
-      console.log(res);
       setUserStack(res.data);
       setShowCopyUrl(true);
       setShowError(false);
     } catch (err) {
-      console.log(err);
       setShowCopyUrl(false);
       setShowError(true);
     }
@@ -68,7 +70,6 @@ const User = () => {
       const res = await axios.get(
         `https://cache.showwcase.com/user/${newUsername}`
       );
-      console.log(res);
       setUserInfo(res.data);
       getStacks(newUsername);
     } catch (err) {
@@ -124,6 +125,33 @@ const User = () => {
     },
   ];
 
+  const getUserStats = ()=>{
+    const stats = []
+    if(userInfo){
+    stats.push({
+      name: 'followers',
+      value: userInfo.totalFollowers
+    })
+
+    stats.push({
+      name:'collaborated',
+      value: userInfo.totalWorkedWiths
+    })
+
+    stats.push({
+      name: 'threads',
+      value: userInfo.totalThreads
+    })
+
+    stats.push({
+      name: 'shows',
+      value: userInfo.engagement.totalPublishedShows
+    })
+  }
+
+    return stats;
+  }
+
   return (
     <div className="container">
       <div className="player">
@@ -143,6 +171,7 @@ const User = () => {
                 activity: userInfo.activity,
                 headline: userInfo.headline,
                 techStack: userStack,
+                stats: getUserStats()
               }}
               durationInFrames={680}
               compositionWidth={1800}

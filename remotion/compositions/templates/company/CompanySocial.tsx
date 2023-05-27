@@ -45,7 +45,7 @@ export const CompanySocial: React.FC<{ socials: string[] }> = ({ socials }) => {
                   cursor: "pointer",
                   transform: `scale(${interpolate(spring({
                     fps,
-                    frame: frame - (50*(index+1)),
+                    frame: frame - (40*(index+1)),
                     durationInFrames: 20,
                     config: { damping: 500 },
                   }),
