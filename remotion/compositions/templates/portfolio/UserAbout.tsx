@@ -1,5 +1,8 @@
 import { AbsoluteFill } from "remotion";
 import React from "react";
+import ReactMarkdown from "react-markdown";
+
+
 
 export const UserAbout: React.FC<{
   about: string;
@@ -27,7 +30,16 @@ export const UserAbout: React.FC<{
       >
         <span style={{ fontFamily: "Cursive" }}>About me</span>
         <br />
-        {about}
+        <ReactMarkdown
+        children={about}
+        components={{
+          a: ({ href, children }) => (
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              {children}
+            </a>
+          ),
+        }}
+      />
       </p>
     </AbsoluteFill>
   );
