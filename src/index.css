@@ -19,3 +19,14 @@ body {
   padding: 0;
 }
 
+.home-player{
+  position: "relative";
+  margin: 60px auto;
+  width: 65vw;
+}
+
+@media only screen and (max-width: 580px) {
+  .home-player{
+    width: 95vw;
+  }
+}
