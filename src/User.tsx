@@ -60,7 +60,6 @@ const User = () => {
       const res = await axios.get(
         `https://cache.showwcase.com/user/${newUsername}/socials`
       );
-      console.log(res.data)
       setUserSocials(res.data.links);
     }catch(err){
       console.log(err)
@@ -92,6 +91,7 @@ const User = () => {
     } catch (err) {
       setUserInfo(null);
       setShowError(true);
+      setShowCopyUrl(false)
     }
   };
 
@@ -172,13 +172,10 @@ const User = () => {
   const getUserSocials = ()=>{
     const newUserSocials = []
 
-    console.log(userSocials)
     newUserSocials.push( `https://www.showwcase.com/${username}`)
     userSocials.forEach((socialLink)=>{
       newUserSocials.push(socialLink.value)
     });
-
-    console.log(newUserSocials)
 
     return newUserSocials
   }
