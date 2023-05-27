@@ -26,13 +26,6 @@ export const Menu = () => {
             <span>🏢 Company</span>
           </NavLink>
         </li>
-        <li className="menu-item">
-          <NavLink to="/events" className={({ isActive, isPending }) =>
-    isPending ? "menu-link" : isActive ? "active-link" : "menu-link"
-  } >
-            <span>📅 Events</span>
-          </NavLink>
-        </li>
       </ul>
     </nav>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, spring, useVideoConfig } from "remotion";
 
-export const CompanySocial: React.FC<{ socials: string[] }> = ({ socials }) => {
+export const CompanySocial: React.FC<{ text?: string, socials: string[] }> = ({ text = "Find Us On", socials }) => {
   const frame = useCurrentFrame();
     const {fps} = useVideoConfig();
 
@@ -30,7 +30,7 @@ export const CompanySocial: React.FC<{ socials: string[] }> = ({ socials }) => {
             fontWeight: 500,
           }}
         >
-          Find Us On
+          {text}
         </span>
         <div>
           {socials.slice(0,5).map((social, index) => {

@@ -101,7 +101,7 @@ export const Portfolio: React.FC<{
           </Transition>
         </Sequence>
         <Sequence from={600}>
-          <CompanySocial socials={socials} />
+          <CompanySocial socials={socials} text="Find Me On" />
         </Sequence>
       </Sequence>
       <Audio src={userAudio} />
