@@ -36,10 +36,15 @@ interface StackProps {
   stack: StackDetailProps;
 }
 
+interface SocialProp {
+  value: string;
+}
+
 const User = () => {
   const [username, setUsername] = useState("");
   const [userInfo, setUserInfo] = useState<UserProps | null>(null);
   const [userStack, setUserStack] = useState<StackProps[]>([]);
+  const [userSocials, setUserSocials] = useState<SocialProp[]>([])
   const [showCopyUrl, setShowCopyUrl] = useState(false);
   const [showError, setShowError] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -48,8 +53,19 @@ const User = () => {
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setUsername(e.currentTarget.value);
-    setShowCopyUrl(false);
   };
+
+  const getSocials = async (newUsername: string)=>{
+    try{
+      const res = await axios.get(
+        `https://cache.showwcase.com/user/${newUsername}/socials`
+      );
+      console.log(res.data)
+      setUserSocials(res.data.links);
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   const getStacks = async (newUsername: string) => {
     try {
@@ -72,6 +88,7 @@ const User = () => {
       );
       setUserInfo(res.data);
       getStacks(newUsername);
+      getSocials(newUsername);
     } catch (err) {
       setUserInfo(null);
       setShowError(true);
@@ -152,6 +169,20 @@ const User = () => {
     return stats;
   }
 
+  const getUserSocials = ()=>{
+    const newUserSocials = []
+
+    console.log(userSocials)
+    newUserSocials.push( `https://www.showwcase.com/${username}`)
+    userSocials.forEach((socialLink)=>{
+      newUserSocials.push(socialLink.value)
+    });
+
+    console.log(newUserSocials)
+
+    return newUserSocials
+  }
+
   return (
     <div className="container">
       <div className="player">
@@ -171,9 +202,10 @@ const User = () => {
                 activity: userInfo.activity,
                 headline: userInfo.headline,
                 techStack: userStack,
-                stats: getUserStats()
+                stats: getUserStats(),
+                socials: getUserSocials()
               }}
-              durationInFrames={680}
+              durationInFrames={1680}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}

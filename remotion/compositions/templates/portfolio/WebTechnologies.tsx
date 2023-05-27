@@ -66,9 +66,9 @@ export const WebTechnologies: React.FC<{ technology: Technology[] }> = ({
             height: "100%",
           }}
         >
-          {chunks.map((ch) => {
+          {chunks.map((ch, index) => {
             return (
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1 }} key={index}>
                 {ch.map((t, i) => {
                   const pos = spring({
                     fps: config.fps,

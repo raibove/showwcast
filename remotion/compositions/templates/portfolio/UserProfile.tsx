@@ -7,7 +7,7 @@ export const UserProfile: React.FC<{
 }> = ({ title, src }) => {
   const frame = useCurrentFrame();
 
-  const scale = interpolate(frame, [10, 30], [0, 1], {
+  const scale = interpolate(frame, [5, 30], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
