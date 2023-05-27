@@ -19,7 +19,7 @@ export const Home = () => {
           width: "100%",
         }}
         controls
-        durationInFrames={1500}
+        durationInFrames={480}
       />
     </div>
   );

@@ -1,12 +1,42 @@
 import React from "react";
-import { Audio, AbsoluteFill, Sequence, Img } from "remotion";
+import {
+  Audio,
+  AbsoluteFill,
+  Sequence,
+  Img,
+  useCurrentFrame,
+  interpolate,
+} from "remotion";
 import "./Intro.css";
 import stomp from "../../../src/assets/stomp.mp3";
 import owl from "../../../src/assets/owl.svg";
+import { Lottie } from "@remotion/lottie";
+import like from "../../../src/assets/like.json"
+import { Transition } from "../templates/company/Transition";
 
 export const Intro: React.FC = () => {
   const text =
     "Introducing Showwcast! The Video Platform for the Showwcase Community!";
+
+  const frame = useCurrentFrame();
+
+  const artifactOpacity = interpolate(frame - 210, [5, 10], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const artifactTranslate = interpolate(frame - 170, [5, 10], [0, 50], {
+    extrapolateRight: "clamp",
+  });
+
+  const sentence2Translate = interpolate(frame - 180, [5, 10], [0, 100], {
+    extrapolateRight: "clamp",
+  });
+
+  const sentence3Translate = interpolate(frame - 200, [5, 10], [140, 150], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <>
@@ -60,6 +90,59 @@ export const Intro: React.FC = () => {
             );
           })}
         </div>
+        <Sequence from={170}>
+          <AbsoluteFill
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              fontSize: "80px",
+            }}
+          >
+            <Img src={owl} height="250px" />
+            <div
+              style={{
+                transform: `translateY(${artifactTranslate}px)`,
+              }}
+            >
+              Elevate your online presence
+            </div>
+            <div
+              style={{
+                transform: `translateY(${sentence2Translate}px)`,
+              }}
+            >
+              & unlock new opportunites
+            </div>
+            <div
+              style={{
+                transform: `translateY(${sentence3Translate}px)`,
+                opacity: artifactOpacity,
+              }}
+            >
+              with Showwcast
+            </div>
+          </AbsoluteFill>
+          <Sequence from={200}>
+            <Transition>
+          <AbsoluteFill
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              fontSize: "90px",
+              fontWeight:'bold',
+              backgroundColor:'white'
+            }}
+          >
+            <Lottie animationData={like}/>
+              <div style={{position:'absolute', marginTop:200}}>
+                Try Showwcast today
+              </div>
+          </AbsoluteFill>
+          </Transition>
+          </Sequence>
+        </Sequence>
         <Audio src={stomp} />
       </AbsoluteFill>
     </>

@@ -33,7 +33,7 @@ export const CompanySocial: React.FC<{ socials: string[] }> = ({ socials }) => {
           Find Us On
         </span>
         <div>
-          {socials.map((social, index) => {
+          {socials.slice(0,5).map((social, index) => {
             return (
               <div
                 key={index}

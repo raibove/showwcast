@@ -205,7 +205,7 @@ const User = () => {
                 stats: getUserStats(),
                 socials: getUserSocials()
               }}
-              durationInFrames={1680}
+              durationInFrames={950}
               compositionWidth={1800}
               compositionHeight={1080}
               fps={30}
