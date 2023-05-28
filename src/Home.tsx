@@ -1,14 +1,11 @@
 import { Player } from "@remotion/player";
 import { Intro } from "../remotion/compositions/intro/Intro";
+import "./index.css";
 
 export const Home = () => {
   return (
     <div
-      style={{
-        position: "relative",
-        margin: "60px auto",
-        width: "65vw",
-      }}
+      className="home-player"
     >
       <Player
         component={Intro}
