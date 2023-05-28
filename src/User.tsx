@@ -6,6 +6,7 @@ import { Portfolio } from "../remotion/compositions/templates/portfolio/Portfoli
 import copy from "./assets/copy.svg";
 import { Instruction } from "../remotion/compositions/instruction/Instruction";
 import { Error } from "../remotion/compositions/error/Error";
+import {owl} from "./assets/owl.svg";
 
 interface ActivityProps {
   emoji: string;
@@ -85,7 +86,26 @@ const User = () => {
       const res = await axios.get(
         `https://cache.showwcase.com/user/${newUsername}`
       );
-      setUserInfo(res.data);
+
+      const newUserInfo = {
+        displayName: res.data.name || "User",
+        about: "A curious person",
+        profilePictureUrl: res.data.profilePictureUrl || owl,
+        location: res.data.location || "World",
+        activity: res.data.activity || {
+          emoji: "",
+          message: "Developing"
+        },
+        headline: res.data.headline || "Human",
+        totalFollowers: res.data.totalFollowers || 0,
+        totalWorkedWiths: res.data.totalWorkedWiths || 0,
+        totalThreads: res.data.totalThreads || 0,
+        engagement: res.data.engagement || {
+          totalPublishedShows: 0
+        }
+      }
+
+      setUserInfo(newUserInfo);
       getStacks(newUsername);
       getSocials(newUsername);
     } catch (err) {
