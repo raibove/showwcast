@@ -162,7 +162,7 @@ const User = () => {
 
     stats.push({
       name: 'shows',
-      value: userInfo.engagement.totalPublishedShows | 0
+      value: userInfo.engagement?.totalPublishedShows | 0
     })
   }
 
