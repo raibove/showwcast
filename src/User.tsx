@@ -6,7 +6,7 @@ import { Portfolio } from "../remotion/compositions/templates/portfolio/Portfoli
 import copy from "./assets/copy.svg";
 import { Instruction } from "../remotion/compositions/instruction/Instruction";
 import { Error } from "../remotion/compositions/error/Error";
-import {owl} from "./assets/owl.svg";
+import owl from "./assets/owl.svg";
 
 interface ActivityProps {
   emoji: string;
