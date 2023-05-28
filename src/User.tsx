@@ -147,22 +147,22 @@ const User = () => {
     if(userInfo){
     stats.push({
       name: 'followers',
-      value: userInfo.totalFollowers
+      value: userInfo.totalFollowers | 0
     })
 
     stats.push({
       name:'collaborated',
-      value: userInfo.totalWorkedWiths
+      value: userInfo.totalWorkedWiths | 0
     })
 
     stats.push({
       name: 'threads',
-      value: userInfo.totalThreads
+      value: userInfo.totalThreads | 0
     })
 
     stats.push({
       name: 'shows',
-      value: userInfo.engagement.totalPublishedShows
+      value: userInfo.engagement.totalPublishedShows | 0
     })
   }
 
