@@ -88,7 +88,7 @@ const User = () => {
       );
 
       const newUserInfo = {
-        displayName: res.data.name || "User",
+        displayName: res.data.displayName || "User",
         about: res.data.about || "A curious person",
         profilePictureUrl: res.data.profilePictureUrl || owl,
         location: res.data.location || "World",
