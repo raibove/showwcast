@@ -6,6 +6,7 @@ import Company from "./Company";
 import NotFound from "./components/not-found/NotFound";
 import { Menu } from "./Menu";
 import { Home } from "./Home";
+import Community from "./Community";
 
 const Layout = ({ routes }: any) => {
   return (
@@ -30,6 +31,10 @@ function App() {
     {
       path: "/company",
       element: <Company />,
+    },
+    {
+      path: "/community",
+      element: <Community />
     },
     {
       path: "*",

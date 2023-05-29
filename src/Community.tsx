@@ -13,7 +13,7 @@ interface ActivityProps {
   message: string;
 }
 
-interface UserProps {
+interface CommunityProps {
   displayName: string;
   about: string;
   profilePictureUrl: string;
@@ -41,38 +41,38 @@ interface SocialProp {
   value: string;
 }
 
-const User = () => {
-  const [username, setUsername] = useState("");
-  const [userInfo, setUserInfo] = useState<UserProps | null>(null);
-  const [userStack, setUserStack] = useState<StackProps[]>([]);
-  const [userSocials, setUserSocials] = useState<SocialProp[]>([])
+const Community = () => {
+  const [communityname, setCommunityname] = useState("");
+  const [communityInfo, setCommunityInfo] = useState<CommunityProps | null>(null);
+  const [communityStack, setCommunityStack] = useState<StackProps[]>([]);
+  const [communitySocials, setCommunitySocials] = useState<SocialProp[]>([])
   const [showCopyUrl, setShowCopyUrl] = useState(false);
   const [showError, setShowError] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const updateUsername = (
+  const updateCommunityname = (
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setUsername(e.currentTarget.value);
+    setCommunityname(e.currentTarget.value);
   };
 
-  const getSocials = async (newUsername: string)=>{
+  const getSocials = async (newCommunityname: string)=>{
     try{
       const res = await axios.get(
-        `https://cache.showwcase.com/user/${newUsername}/socials`
+        `https://cache.showwcase.com/community/${newCommunityname}/socials`
       );
-      setUserSocials(res.data.links);
+      setCommunitySocials(res.data.links);
     }catch(err){
       console.log(err)
     }
   }
 
-  const getStacks = async (newUsername: string) => {
+  const getStacks = async (newCommunityname: string) => {
     try {
       const res = await axios.get(
-        `https://cache.showwcase.com/user/${newUsername}/stacks`
+        `https://cache.showwcase.com/community/${newCommunityname}/stacks`
       );
-      setUserStack(res.data);
+      setCommunityStack(res.data);
       setShowCopyUrl(true);
       setShowError(false);
     } catch (err) {
@@ -81,15 +81,25 @@ const User = () => {
     }
   };
 
-  const getUser = async (newUsername = username) => {
+  
+  const formatCommunityname = (newCommunityname: string) => {
+    const currentCompanyName = newCommunityname.toLowerCase();
+    const companyArr = currentCompanyName.split(" ");
+    return companyArr.join("-");
+  };
+
+  const getCommunity = async (newCommunityname = communityname) => {
     try {
+
+      const formatedCommunityname = formatCommunityname(newCommunityname);
+
       const res = await axios.get(
-        `https://cache.showwcase.com/user/${newUsername}`
+        `https://cache.showwcase.com/community/${formatedCommunityname}`
       );
 
-      const newUserInfo = {
-        displayName: res.data.name || "User",
-        about: res.data.about || "A curious person",
+      const newCommunityInfo = {
+        displayName: res.data.name || "Community",
+        about: "To discuss together",
         profilePictureUrl: res.data.profilePictureUrl || owl,
         location: res.data.location || "World",
         activity: res.data.activity || {
@@ -105,11 +115,11 @@ const User = () => {
         }
       }
 
-      setUserInfo(newUserInfo);
-      getStacks(newUsername);
-      getSocials(newUsername);
+      setCommunityInfo(newCommunityInfo);
+      getStacks(newCommunityname);
+      getSocials(newCommunityname);
     } catch (err) {
-      setUserInfo(null);
+      setCommunityInfo(null);
       setShowError(true);
       setShowCopyUrl(false)
     }
@@ -117,13 +127,13 @@ const User = () => {
 
   const handleKeypress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      getUser();
+      getCommunity();
     }
   };
 
   const copyURLWithQueryParams = () => {
     const queryParams = new URLSearchParams(window.location.search);
-    queryParams.set("name", username);
+    queryParams.set("name", communityname);
 
     const modifiedURL = `${window.location.origin}${
       window.location.pathname
@@ -138,9 +148,9 @@ const User = () => {
     const nameParam = queryParams.get("name");
 
     if (nameParam) {
-      setUsername(nameParam);
+      setCommunityname(nameParam);
       setShowCopyUrl(true);
-      getUser(nameParam);
+      getCommunity(nameParam);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -148,11 +158,11 @@ const User = () => {
   const instructions = [
     {
       id: 0,
-      title: "To create a video of your user-profile",
+      title: "To create a video of your community-profile",
     },
     {
       id: 1,
-      title: "Enter the username name from the showwcase profile",
+      title: "Enter the community name from the showwcase profile",
     },
     { id: 2, title: "and click on submit" },
     {
@@ -162,48 +172,48 @@ const User = () => {
     },
   ];
 
-  const getUserStats = ()=>{
+  const getCommunityStats = ()=>{
     const stats = []
-    if(userInfo){
+    if(communityInfo){
     stats.push({
       name: 'followers',
-      value: userInfo.totalFollowers | 0
+      value: communityInfo.totalFollowers | 0
     })
 
     stats.push({
       name:'collaborated',
-      value: userInfo.totalWorkedWiths | 0
+      value: communityInfo.totalWorkedWiths | 0
     })
 
     stats.push({
       name: 'threads',
-      value: userInfo.totalThreads | 0
+      value: communityInfo.totalThreads | 0
     })
 
     stats.push({
       name: 'shows',
-      value: userInfo.engagement?.totalPublishedShows | 0
+      value: communityInfo.engagement?.totalPublishedShows | 0
     })
   }
 
     return stats;
   }
 
-  const getUserSocials = ()=>{
-    const newUserSocials = []
+  const getCommunitySocials = ()=>{
+    const newCommunitySocials = []
 
-    newUserSocials.push( `https://www.showwcase.com/${username}`)
-    userSocials.forEach((socialLink)=>{
-      newUserSocials.push(socialLink.value)
+    newCommunitySocials.push( `https://www.showwcase.com/${communityname}`)
+    communitySocials.forEach((socialLink)=>{
+      newCommunitySocials.push(socialLink.value)
     });
 
-    return newUserSocials
+    return newCommunitySocials
   }
 
   return (
     <div className="container">
       <div className="player">
-        {showCopyUrl === true && userInfo !== null && (
+        {showCopyUrl === true && communityInfo !== null && (
           <div
             style={{
               position: "relative",
@@ -212,15 +222,15 @@ const User = () => {
             <Player
               component={Portfolio}
               inputProps={{
-                title: userInfo.displayName,
-                src: userInfo.profilePictureUrl,
-                about: userInfo.about,
-                location: userInfo.location,
-                activity: userInfo.activity,
-                headline: userInfo.headline,
-                techStack: userStack,
-                stats: getUserStats(),
-                socials: getUserSocials()
+                title: communityInfo.displayName,
+                src: communityInfo.profilePictureUrl,
+                about: communityInfo.about,
+                location: communityInfo.location,
+                activity: communityInfo.activity,
+                headline: communityInfo.headline,
+                techStack: communityStack,
+                stats: getCommunityStats(),
+                socials: getCommunitySocials()
               }}
               durationInFrames={970}
               compositionWidth={1800}
@@ -264,7 +274,7 @@ const User = () => {
             <Player
               component={Error}
               inputProps={{
-                error: "user name",
+                error: "community name",
               }}
               durationInFrames={400}
               compositionWidth={1800}
@@ -279,14 +289,14 @@ const User = () => {
         )}
       </div>
       <div className="form">
-        <h3 className="title">Username</h3>
+        <h3 className="title">Community name</h3>
         <input
           className="input"
-          value={username}
-          onChange={updateUsername}
+          value={communityname}
+          onChange={updateCommunityname}
           onKeyDown={handleKeypress}
         />
-        <button className="submit" onClick={() => getUser()}>
+        <button className="submit" onClick={() => getCommunity()}>
           Submit
         </button>
         {showCopyUrl === true && (
@@ -306,4 +316,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Community;
