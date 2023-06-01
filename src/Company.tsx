@@ -34,7 +34,6 @@ const Company = () => {
     e: FormEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setCompanyName(e.currentTarget.value);
-    setShowCopyUrl(false);
   };
 
   const formatCompanyName = (newCompanyName: string) => {
