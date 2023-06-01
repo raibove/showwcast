@@ -21,6 +21,7 @@ interface CompanyProps {
   teamType: string;
   url: string;
   socials: string[];
+  slug: string;
 }
 
 const Company = () => {
@@ -65,6 +66,7 @@ const Company = () => {
         teamType: res.data.size?.label || "Growing Team",
         url: res.data.url || "https://www.showwcase.com",
         socials: socials,
+        slug: res.data.slug ||companyName,
       };
 
       setCompanyInfo(newCompanyInfo);
@@ -102,7 +104,8 @@ const Company = () => {
 
   const copyURLWithQueryParams = () => {
     const queryParams = new URLSearchParams(window.location.search);
-    queryParams.set("name", companyName);
+    if(companyInfo!=null)
+    queryParams.set("name", companyInfo.slug);
 
     const modifiedURL = `${window.location.origin}${
       window.location.pathname
