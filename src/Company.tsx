@@ -59,7 +59,7 @@ const Company = () => {
 
       const newCompanyInfo = {
         name: res.data.name || "Company",
-        logo: res.data.logo || owl,
+        logo: res.data.logoUrl || owl,
         oneLiner: res.data.oneLiner || "A company you would like to be in",
         location: res.data.location || "World",
         teamSize: res.data.size?.value || 10,
